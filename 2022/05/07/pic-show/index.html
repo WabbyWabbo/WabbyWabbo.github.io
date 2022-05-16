@@ -20,27 +20,33 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="使用本地文件或者图床的方式，在博客中正确的显示图片。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2022/05/16/hello-world/index.html">
+<meta property="og:title" content="hexo中图片的两种显示方案">
+<meta property="og:url" content="http://example.com/2022/05/07/pic-show/index.html">
 <meta property="og:site_name" content="Yatung&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="使用本地文件或者图床的方式，在博客中正确的显示图片。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-16T14:12:15.749Z">
+<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152335930.png">
+<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152336687.png">
+<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205160038031.png">
+<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152340645.png">
+<meta property="article:published_time" content="2022-05-06T16:21:43.000Z">
+<meta property="article:modified_time" content="2022-05-16T13:37:52.108Z">
 <meta property="article:author" content="Yatung Yu">
+<meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152335930.png">
 
 
-<link rel="canonical" href="http://example.com/2022/05/16/hello-world/">
+<link rel="canonical" href="http://example.com/2022/05/07/pic-show/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/05/16/hello-world/","path":"2022/05/16/hello-world/","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/05/07/pic-show/","path":"2022/05/07/pic-show/","title":"hexo中图片的两种显示方案"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | Yatung's Blog</title>
+<title>hexo中图片的两种显示方案 | Yatung's Blog</title>
   
 
 
@@ -116,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">使用本地文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.</span> <span class="nav-text">使用对象存储服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%85%BE%E8%AE%AF%E4%BA%91"><span class="nav-number">2.0.1.</span> <span class="nav-text">腾讯云</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Typora"><span class="nav-number">2.0.2.</span> <span class="nav-text">Typora</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PicGo"><span class="nav-number">2.0.3.</span> <span class="nav-text">PicGo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">2.0.4.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -184,7 +190,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/16/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/07/pic-show/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -197,12 +203,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Hello World | Yatung's Blog">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="hexo中图片的两种显示方案 | Yatung's Blog">
+      <meta itemprop="description" content="使用本地文件或者图床的方式，在博客中正确的显示图片。">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          hexo中图片的两种显示方案
         </h1>
 
         <div class="post-meta-container">
@@ -212,14 +218,21 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-05-16 00:00:00 / Modified: 22:12:15" itemprop="dateCreated datePublished" datetime="2022-05-16T00:00:00+08:00">2022-05-16</time>
+      <time title="Created: 2022-05-07 00:21:43" itemprop="dateCreated datePublished" datetime="2022-05-07T00:21:43+08:00">2022-05-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-05-16 21:37:52" itemprop="dateModified" datetime="2022-05-16T21:37:52+08:00">2022-05-16</time>
     </span>
 
   
 </div>
 
+            <div class="post-description">使用本地文件或者图床的方式，在博客中正确的显示图片。</div>
         </div>
       </header>
 
@@ -227,19 +240,31 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h2 id="使用本地文件"><a href="#使用本地文件" class="headerlink" title="使用本地文件"></a>使用本地文件</h2><p>参考官方文档即可：<a target="_blank" rel="noopener" href="https://hexo.io/docs/asset-folders">Docs</a></p>
+<h2 id="使用对象存储服务"><a href="#使用对象存储服务" class="headerlink" title="使用对象存储服务"></a>使用对象存储服务</h2><p>以Typora + PicGo + 腾讯云COS(V5)为例，具体操作如下：</p>
+<h4 id="腾讯云"><a href="#腾讯云" class="headerlink" title="腾讯云"></a>腾讯云</h4><ol>
+<li><p>登录后，购买资源包，新用户应该是赠送半年。链接：<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cos">腾讯云COS</a></p>
+</li>
+<li><p>创建存储桶，名字任取，修改权限为<code>公开读私有写</code>。桶创建完成后，可根据需要创建文件夹。</p>
+<p><img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152335930.png" alt="图像 004"></p>
+</li>
+<li><p>处于安全考虑，建议创建子用户并只允许api访问。链接：<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cam">用户列表</a></p>
+</li>
+<li><p>点进刚刚创建的子用户，查看API秘钥，获取<code>SecretId</code>和<code>SecretKey</code></p>
+</li>
+</ol>
+<h4 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h4><p>Typora-文件-偏好设置-图像，如下设置，未下载PicGo的要先下载并输入PicGo.exe路径。</p>
+<p><img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152336687.png" alt="图像 007"></p>
+<h4 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h4><p>图床设置：</p>
+<ul>
+<li>SecretId和SecretKey按上文方式已获取</li>
+<li>appid：创建桶时，名称中<code>-</code>后面的那一串数字，或者也可以在<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cam/capi">这里</a> 找到。</li>
+<li>存储空间名：桶名</li>
+<li>存储区域：在域名中可以找到代号，如ap-nanjing</li>
+<li>存储路径：默认在桶的根目录，也可以指定到自己创建的子目录中<br><img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205160038031.png" alt="PicGo"></li>
+</ul>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>点击Tyrora中的<em>验证图片上传选项</em>，查看效果。</p>
+<p><img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152340645.png" alt="image-20220515234000571"></p>
 
     </div>
 
@@ -248,18 +273,18 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/05/15/stack-and-queue/" rel="prev" title="栈与队列">
-                  <i class="fa fa-chevron-left"></i> 栈与队列
-                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/05/16/binary-search/" rel="next" title="binary search">
-                  binary search <i class="fa fa-chevron-right"></i>
+                <a href="/2022/05/07/computer-network/" rel="next" title="计算机网络复习">
+                  计算机网络复习 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
