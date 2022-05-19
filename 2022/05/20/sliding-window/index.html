@@ -21,15 +21,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="滑动窗口解题方法： 123456789101112HashMap: window, needint: left, right, valid初始化needwhile(right &lt; s.length)&amp;#123;	char c &#x3D; s.charAt(right++);	更新window和valid	while(窗口收缩条件)&amp;#123;  &#x2F;&#x2F; 不固定长度的窗口：valid&#x3D;&#x3D;need.siz">
+    <meta name="description" content="解题方法：123456789101112HashMap: window, needint: left, right, valid初始化needwhile(right &lt; s.length)&amp;#123;	char c &#x3D; s.charAt(right++);	更新window和valid	while(窗口收缩条件)&amp;#123;  &#x2F;&#x2F; 不固定长度的窗口：valid&#x3D;&#x3D;need.size()或者">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sliding window">
+<meta property="og:title" content="滑动窗口">
 <meta property="og:url" content="http://example.com/2022/05/20/sliding-window/index.html">
 <meta property="og:site_name" content="Yatung&#39;s Blog">
-<meta property="og:description" content="滑动窗口解题方法： 123456789101112HashMap: window, needint: left, right, valid初始化needwhile(right &lt; s.length)&amp;#123;	char c &#x3D; s.charAt(right++);	更新window和valid	while(窗口收缩条件)&amp;#123;  &#x2F;&#x2F; 不固定长度的窗口：valid&#x3D;&#x3D;need.siz">
+<meta property="og:description" content="解题方法：123456789101112HashMap: window, needint: left, right, valid初始化needwhile(right &lt; s.length)&amp;#123;	char c &#x3D; s.charAt(right++);	更新window和valid	while(窗口收缩条件)&amp;#123;  &#x2F;&#x2F; 不固定长度的窗口：valid&#x3D;&#x3D;need.size()或者">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-19T18:10:41.000Z">
-<meta property="article:modified_time" content="2022-05-19T19:04:27.419Z">
+<meta property="article:modified_time" content="2022-05-19T19:06:58.804Z">
 <meta property="article:author" content="Yatung Yu">
 <meta property="article:tag" content="滑动窗口">
 <meta property="article:tag" content="算法基础">
@@ -40,10 +40,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/05/20/sliding-window/","path":"2022/05/20/sliding-window/","title":"sliding window"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/05/20/sliding-window/","path":"2022/05/20/sliding-window/","title":"滑动窗口"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>sliding window | Yatung's Blog</title>
+<title>滑动窗口 | Yatung's Blog</title>
   
 
 
@@ -119,7 +119,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">滑动窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">2.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2"><span class="nav-number">2.1.</span> <span class="nav-text">[3. 无重复字符的最长子串]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#567-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97"><span class="nav-number">2.2.</span> <span class="nav-text">[567. 字符串的排列]</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">解题方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">2.</span> <span class="nav-text">练习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2"><span class="nav-number">2.1.</span> <span class="nav-text">[3. 无重复字符的最长子串]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#567-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97"><span class="nav-number">2.2.</span> <span class="nav-text">[567. 字符串的排列]</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -213,12 +213,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="sliding window | Yatung's Blog">
+      <meta itemprop="name" content="滑动窗口 | Yatung's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          sliding window
+          滑动窗口
         </h1>
 
         <div class="post-meta-container">
@@ -230,7 +230,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2022-05-20 02:10:41 / 修改时间：03:04:27" itemprop="dateCreated datePublished" datetime="2022-05-20T02:10:41+08:00">2022-05-20</time>
+      <time title="创建时间：2022-05-20 02:10:41 / 修改时间：03:06:58" itemprop="dateCreated datePublished" datetime="2022-05-20T02:10:41+08:00">2022-05-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -252,8 +252,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h3><p>解题方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HashMap: window, need</span><br><span class="line"><span class="type">int</span>: left, right, valid</span><br><span class="line">初始化need</span><br><span class="line"><span class="title function_">while</span><span class="params">(right &lt; s.length)</span>&#123;</span><br><span class="line">	<span class="type">char</span> <span class="variable">c</span> <span class="operator">=</span> s.charAt(right++);</span><br><span class="line">	更新window和valid</span><br><span class="line">	<span class="title function_">while</span><span class="params">(窗口收缩条件)</span>&#123;  <span class="comment">// 不固定长度的窗口：valid==need.size()或者固定长度的窗口：right-left&gt;=t.length()</span></span><br><span class="line">		此处可以对[left,right)做判断，这个窗口是不是我们要找的那个<span class="comment">// 找最小的窗口：right-left &lt; minLen或者找定长窗口：valid == need.size()</span></span><br><span class="line">		<span class="type">char</span> <span class="variable">d</span> <span class="operator">=</span> s.charAt(left++);</span><br><span class="line">		更新window和valid</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="解题方法："><a href="#解题方法：" class="headerlink" title="解题方法："></a>解题方法：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HashMap: window, need</span><br><span class="line"><span class="type">int</span>: left, right, valid</span><br><span class="line">初始化need</span><br><span class="line"><span class="title function_">while</span><span class="params">(right &lt; s.length)</span>&#123;</span><br><span class="line">	<span class="type">char</span> <span class="variable">c</span> <span class="operator">=</span> s.charAt(right++);</span><br><span class="line">	更新window和valid</span><br><span class="line">	<span class="title function_">while</span><span class="params">(窗口收缩条件)</span>&#123;  <span class="comment">// 不固定长度的窗口：valid==need.size()或者固定长度的窗口：right-left&gt;=t.length()</span></span><br><span class="line">		此处可以对[left,right)做判断，这个窗口是不是我们要找的那个<span class="comment">// 找最小的窗口：right-left &lt; minLen或者找定长窗口：valid == need.size()</span></span><br><span class="line">		<span class="type">char</span> <span class="variable">d</span> <span class="operator">=</span> s.charAt(left++);</span><br><span class="line">		更新window和valid</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><h4 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="[3. 无重复字符的最长子串]"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">[3. 无重复字符的最长子串]</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模板解法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">lengthOfLongestSubstring</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        HashMap&lt;Character,Integer&gt; window = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="type">char</span>[] ss = s.toCharArray();</span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> <span class="number">0</span>, right = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(right &lt; ss.length)&#123;</span><br><span class="line">            <span class="type">char</span> <span class="variable">c</span> <span class="operator">=</span> ss[right];</span><br><span class="line">            right++;</span><br><span class="line">            window.put(c,window.getOrDefault(c,<span class="number">0</span>)+<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">while</span>(window.get(c) &gt; <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="type">char</span> <span class="variable">d</span> <span class="operator">=</span> ss[left];</span><br><span class="line">                left++;</span><br><span class="line">                window.put(d,window.get(d)-<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            ans = ans &gt; right-left ? ans : right-left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
