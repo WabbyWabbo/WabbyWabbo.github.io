@@ -21,33 +21,32 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="使用本地文件或者图床的方式，在博客中正确的显示图片。">
+    <meta name="description" content="离线方式使用element-ui，在其他电脑上的el插件显示中文乱码问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo中图片的两种显示方案">
-<meta property="og:url" content="http://example.com/2022/05/07/pic-show/index.html">
+<meta property="og:title" content="element-ui-encoding">
+<meta property="og:url" content="http://example.com/2022/06/09/element-ui-encoding/index.html">
 <meta property="og:site_name" content="Yatung&#39;s Blog">
-<meta property="og:description" content="使用本地文件或者图床的方式，在博客中正确的显示图片。">
+<meta property="og:description" content="离线方式使用element-ui，在其他电脑上的el插件显示中文乱码问题。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152335930.png">
-<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152336687.png">
-<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205160038031.png">
-<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152340645.png">
-<meta property="article:published_time" content="2022-05-06T16:21:43.000Z">
-<meta property="article:modified_time" content="2022-05-21T17:38:55.154Z">
+<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202206091641185.png">
+<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202206091646264.png">
+<meta property="og:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202206091647018.png">
+<meta property="article:published_time" content="2022-06-09T08:36:40.000Z">
+<meta property="article:modified_time" content="2022-06-09T08:49:18.734Z">
 <meta property="article:author" content="Yatung Yu">
-<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="element-ui">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152335930.png">
+<meta name="twitter:image" content="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202206091641185.png">
 
 
-<link rel="canonical" href="http://example.com/2022/05/07/pic-show/">
+<link rel="canonical" href="http://example.com/2022/06/09/element-ui-encoding/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/05/07/pic-show/","path":"2022/05/07/pic-show/","title":"hexo中图片的两种显示方案"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/06/09/element-ui-encoding/","path":"2022/06/09/element-ui-encoding/","title":"element-ui-encoding"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>hexo中图片的两种显示方案 | Yatung's Blog</title>
+<title>element-ui-encoding | Yatung's Blog</title>
   
 
 
@@ -123,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9C%AC%E5%9C%B0%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">使用本地文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.</span> <span class="nav-text">使用对象存储服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%85%BE%E8%AE%AF%E4%BA%91"><span class="nav-number">2.0.1.</span> <span class="nav-text">腾讯云</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Typora"><span class="nav-number">2.0.2.</span> <span class="nav-text">Typora</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PicGo"><span class="nav-number">2.0.3.</span> <span class="nav-text">PicGo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">2.0.4.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">现象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">2.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80-%E4%BD%BF%E7%94%A8CDN%E7%9A%84%E6%96%B9%E5%BC%8F%E5%BC%95%E5%85%A5"><span class="nav-number">2.0.1.</span> <span class="nav-text">方法一 使用CDN的方式引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C-%E4%BD%BF%E7%94%A8npm%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85%EF%BC%8C%E7%84%B6%E5%90%8E%E6%8B%B7%E8%B4%9D%E5%87%BA%E5%85%B6index-js%E6%96%87%E4%BB%B6"><span class="nav-number">2.0.2.</span> <span class="nav-text">方法二 使用npm的方式安装，然后拷贝出其index.js文件</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -204,7 +203,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/07/pic-show/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/09/element-ui-encoding/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -217,12 +216,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="hexo中图片的两种显示方案 | Yatung's Blog">
-      <meta itemprop="description" content="使用本地文件或者图床的方式，在博客中正确的显示图片。">
+      <meta itemprop="name" content="element-ui-encoding | Yatung's Blog">
+      <meta itemprop="description" content="离线方式使用element-ui，在其他电脑上的el插件显示中文乱码问题。">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          hexo中图片的两种显示方案
+          element-ui-encoding
         </h1>
 
         <div class="post-meta-container">
@@ -232,21 +231,24 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-05-07 00:21:43" itemprop="dateCreated datePublished" datetime="2022-05-07T00:21:43+08:00">2022-05-07</time>
+      <time title="创建时间：2022-06-09 16:36:40 / 修改时间：16:49:18" itemprop="dateCreated datePublished" datetime="2022-06-09T16:36:40+08:00">2022-06-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
+        <i class="far fa-folder"></i>
       </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-05-22 01:38:55" itemprop="dateModified" datetime="2022-05-22T01:38:55+08:00">2022-05-22</time>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
     </span>
 
   
 </div>
 
-            <div class="post-description">使用本地文件或者图床的方式，在博客中正确的显示图片。</div>
+            <div class="post-description">离线方式使用element-ui，在其他电脑上的el插件显示中文乱码问题。</div>
         </div>
       </header>
 
@@ -254,34 +256,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="使用本地文件"><a href="#使用本地文件" class="headerlink" title="使用本地文件"></a>使用本地文件</h2><p>参考官方文档即可：<a target="_blank" rel="noopener" href="https://hexo.io/docs/asset-folders">Docs</a></p>
-<h2 id="使用对象存储服务"><a href="#使用对象存储服务" class="headerlink" title="使用对象存储服务"></a>使用对象存储服务</h2><p>以Typora + PicGo + 腾讯云COS(V5)为例，具体操作如下：</p>
-<h4 id="腾讯云"><a href="#腾讯云" class="headerlink" title="腾讯云"></a>腾讯云</h4><ol>
-<li><p>登录后，购买资源包，新用户应该是赠送半年。链接：<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cos">腾讯云COS</a></p>
-</li>
-<li><p>创建存储桶，名字任取，修改权限为<code>公开读私有写</code>。桶创建完成后，可根据需要创建文件夹。</p>
-<img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152335930.png" alt="图像 004" style="zoom:50%;" />
-</li>
-<li><p>处于安全考虑，建议创建子用户并只允许api访问。链接：<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cam">用户列表</a></p>
-</li>
-<li><p>点进刚刚创建的子用户，查看API秘钥，获取<code>SecretId</code>和<code>SecretKey</code></p>
-</li>
-</ol>
-<h4 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h4><p>Typora-文件-偏好设置-图像，如下设置，未下载PicGo的要先下载并输入PicGo.exe路径。</p>
-<img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152336687.png" alt="图像 007" style="zoom:50%;" />
+        <h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202206091641185.png" alt="6f106e8b2b0c0a6372caf35243cbf38" style="zoom:50%;" />
 
-<h4 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h4><p>图床设置：</p>
-<ul>
-<li>SecretId和SecretKey按上文方式已获取</li>
-<li>appid：创建桶时，名称中<code>-</code>后面的那一串数字，或者也可以在<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/cam/capi">这里</a> 找到。</li>
-<li>存储空间名：桶名</li>
-<li>存储区域：在域名中可以找到代号，如ap-nanjing</li>
-<li>存储路径：默认在桶的根目录，也可以指定到自己创建的子目录中</li>
-</ul>
-<img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205160038031.png" alt="PicGo" style="zoom:50%;" />
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h4 id="方法一-使用CDN的方式引入"><a href="#方法一-使用CDN的方式引入" class="headerlink" title="方法一 使用CDN的方式引入"></a>方法一 使用CDN的方式引入</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入组件库 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://unpkg.com/element-ui/lib/index.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>点击Tyrora中的<em>验证图片上传选项</em>，查看效果。</p>
-<img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202205152340645.png" alt="image-20220515234000571" style="zoom:50%;" />
+
+
+<h4 id="方法二-使用npm的方式安装，然后拷贝出其index-js文件"><a href="#方法二-使用npm的方式安装，然后拷贝出其index-js文件" class="headerlink" title="方法二 使用npm的方式安装，然后拷贝出其index.js文件"></a>方法二 使用npm的方式安装，然后拷贝出其index.js文件</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vue create my-app</span><br><span class="line">cd my-app</span><br><span class="line">npm i element-ui -S</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，找到：<code>my-app\node_modules\element-ui\lib</code>目录</p>
+<img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202206091646264.png" alt="image-20220609164631169" style="zoom:50%;" />
+
+<p>拷贝到项目目录，然后引入该index.js文件即可。</p>
+<img src="https://mycos-1308151561.cos.ap-nanjing.myqcloud.com/typora/202206091647018.png" alt="image-20220609164752983" style="zoom:50%;" />
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../plugins/element-ui/index.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 
     </div>
 
@@ -291,18 +281,18 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/element-ui/" rel="tag"># element-ui</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2022/05/22/dfs-and-bfs/" rel="prev" title="广度优先搜索 / 深度优先搜索">
+                  <i class="fa fa-chevron-left"></i> 广度优先搜索 / 深度优先搜索
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/05/07/computer-network/" rel="next" title="计算机网络复习">
-                  计算机网络复习 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -350,11 +340,11 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://example.com/2022/05/07/pic-show/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://example.com/2022/06/09/element-ui-encoding/"}</script>
   <script src="/js/third-party/quicklink.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"WabbyWabbo","repo":"WabbyWabbo.github.io","client_id":"db3d3bf0cfb1033367db","client_secret":"a410a2c056a67a96740460999e235a03777bb5f9","admin_user":"WabbyWabbo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"c160c619f39f2ce7fd5bd0e572b17662"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"WabbyWabbo","repo":"WabbyWabbo.github.io","client_id":"db3d3bf0cfb1033367db","client_secret":"a410a2c056a67a96740460999e235a03777bb5f9","admin_user":"WabbyWabbo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"625d42cf6ae6b3eca474ba15640f9f58"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
