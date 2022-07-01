@@ -21,29 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Stay hungry, Stay foolish.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://example.com/categories/index.html">
+    <meta name="description" content="git实用技巧：将多次commit合并为一次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git合并多次commit">
+<meta property="og:url" content="http://example.com/2022/07/01/git-rebase/index.html">
 <meta property="og:site_name" content="Yatung&#39;s Blog">
-<meta property="og:description" content="Stay hungry, Stay foolish.">
+<meta property="og:description" content="git实用技巧：将多次commit合并为一次">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-16T15:59:26.000Z">
-<meta property="article:modified_time" content="2022-05-21T17:41:16.599Z">
+<meta property="article:published_time" content="2022-07-01T07:10:07.000Z">
+<meta property="article:modified_time" content="2022-07-01T07:12:42.780Z">
 <meta property="article:author" content="Yatung Yu">
-<meta property="article:tag" content="Java">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/categories/">
+<link rel="canonical" href="http://example.com/2022/07/01/git-rebase/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"http://example.com/categories/index.html","path":"categories/index.html","title":"分类"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/07/01/git-rebase/","path":"2022/07/01/git-rebase/","title":"Git合并多次commit"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>分类 | Yatung's Blog
-</title>
+<title>Git合并多次commit | Yatung's Blog</title>
   
 
 
@@ -188,43 +187,113 @@
 </noscript>
 
 
-    <div class="main-inner page posts-expand">
+    <div class="main-inner post posts-expand">
 
 
-    
-    
-    
-    <div class="post-block" lang="zh-CN"><header class="post-header">
+  
 
-<h1 class="post-title" itemprop="name headline">分类
-</h1>
 
-<div class="post-meta-container">
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/01/git-rebase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yatung Yu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yatung's Blog">
+      <meta itemprop="description" content="Stay hungry, Stay foolish.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Git合并多次commit | Yatung's Blog">
+      <meta itemprop="description" content="git实用技巧：将多次commit合并为一次">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Git合并多次commit
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-07-01 15:10:07 / 修改时间：15:12:42" itemprop="dateCreated datePublished" datetime="2022-07-01T15:10:07+08:00">2022-07-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Others/" itemprop="url" rel="index"><span itemprop="name">Others</span></a>
+        </span>
+    </span>
+
+  
 </div>
 
-</header>
+            <div class="post-description">git实用技巧：将多次commit合并为一次</div>
+        </div>
+      </header>
 
-      
-      
-      <div class="post-body"><div class="category-all-page">
-  <div class="category-all-title">
-    目前共计 5 个分类
-  </div>
-  <div class="category-all">
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Courses/">Courses</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LeetCode/">LeetCode</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">1</span></li></ul>
-  </div>
-</div>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>例子：当前有3次commit如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit 4a05ce629fc887137929fd9fcfc65a726f9e3591 (HEAD -&gt; master)</span><br><span class="line">Author: Yadong Yu &lt;65695568+WabbyWabbo@users.noreply.github.com&gt;</span><br><span class="line">Date:   Fri Jul 1 14:50:06 2022 +0800</span><br><span class="line"></span><br><span class="line">    3</span><br><span class="line"></span><br><span class="line">commit fec7739d51471680cd84799f1f6cd1d717cfcfda</span><br><span class="line">Author: Yadong Yu &lt;65695568+WabbyWabbo@users.noreply.github.com&gt;</span><br><span class="line">Date:   Fri Jul 1 14:49:24 2022 +0800</span><br><span class="line"></span><br><span class="line">    2</span><br><span class="line"></span><br><span class="line">commit acb908b8b8b5c63462623feabcf9557207992127</span><br><span class="line">Author: Yadong Yu &lt;65695568+WabbyWabbo@users.noreply.github.com&gt;</span><br><span class="line">Date:   Fri Jul 1 14:48:58 2022 +0800</span><br><span class="line"></span><br><span class="line">    1</span><br></pre></td></tr></table></figure>
 
-      </div>
-      
-      
-      
+<p>现在想把2和3进行合并，则执行如下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase -i acb908 <span class="comment"># rebase到 commit 1 上面</span></span><br></pre></td></tr></table></figure>
+
+<p>然后会弹出vim窗口，按照提示操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pick &lt;commit&gt;</span><br><span class="line">squash &lt;commit&gt;</span><br></pre></td></tr></table></figure>
+
+<p>保存退出后，再输入本次合并后的commit message，即成功合并了2次commit（相当于rebase到第一次commit基础上，又多了一次合并的commit）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit 35861c292bd48d942317e851d4de7b761e69721f (HEAD -&gt; master)</span><br><span class="line">Author: Yadong Yu &lt;65695568+WabbyWabbo@users.noreply.github.com&gt;</span><br><span class="line">Date:   Fri Jul 1 14:49:24 2022 +0800</span><br><span class="line"></span><br><span class="line">    2</span><br><span class="line"></span><br><span class="line">    3</span><br><span class="line"></span><br><span class="line">commit acb908b8b8b5c63462623feabcf9557207992127</span><br><span class="line">Author: Yadong Yu &lt;65695568+WabbyWabbo@users.noreply.github.com&gt;</span><br><span class="line">Date:   Fri Jul 1 14:48:58 2022 +0800</span><br><span class="line"></span><br><span class="line">    1</span><br></pre></td></tr></table></figure>
     </div>
 
     
     
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/25/inOrder-traverse/" rel="prev" title="中序遍历">
+                  <i class="fa fa-chevron-left"></i> 中序遍历
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
 
 
+
+
+
+
+    <div class="comments gitalk-container"></div>
 </div>
   </main>
 
@@ -260,11 +329,11 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://example.com/categories/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://example.com/2022/07/01/git-rebase/"}</script>
   <script src="/js/third-party/quicklink.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"WabbyWabbo","repo":"WabbyWabbo.github.io","client_id":"db3d3bf0cfb1033367db","client_secret":"a410a2c056a67a96740460999e235a03777bb5f9","admin_user":"WabbyWabbo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"a676607444a8bc8b150c9a3aff884e61"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"WabbyWabbo","repo":"WabbyWabbo.github.io","client_id":"db3d3bf0cfb1033367db","client_secret":"a410a2c056a67a96740460999e235a03777bb5f9","admin_user":"WabbyWabbo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"bd91044b7bc1df99a70314d0c516d407"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
