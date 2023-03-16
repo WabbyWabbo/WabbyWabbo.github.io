@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="数位DP788. 旋转数字我们称一个数 X 为好数, 如果它的每位数字逐个地被旋转 180 度后，我们仍可以得到一个有效的，且和 X 不同的数。要求每位数字都要被旋转。 如果一个数的每位数字被旋转以后仍然还是一个数字， 则这个数是有效的。0, 1, 和 8 被旋转后仍然是它们自己；2 和 5 可以互相旋转成对方（在这种情况下，它们以不同的方向旋转，换句话说，2 和 5 互为镜像）；6 和 9 同理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数位DP">
+<meta property="og:url" content="http://example.com/2022/09/20/digit-dp/index.html">
+<meta property="og:site_name" content="Yatung&#39;s Blog">
+<meta property="og:description" content="数位DP788. 旋转数字我们称一个数 X 为好数, 如果它的每位数字逐个地被旋转 180 度后，我们仍可以得到一个有效的，且和 X 不同的数。要求每位数字都要被旋转。 如果一个数的每位数字被旋转以后仍然还是一个数字， 则这个数是有效的。0, 1, 和 8 被旋转后仍然是它们自己；2 和 5 可以互相旋转成对方（在这种情况下，它们以不同的方向旋转，换句话说，2 和 5 互为镜像）；6 和 9 同理">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-20T13:37:10.000Z">
+<meta property="article:modified_time" content="2023-03-16T16:39:18.248Z">
+<meta property="article:author" content="Yatung Yu">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/09/20/digit-dp/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/09/20/digit-dp/","path":"2022/09/20/digit-dp/","title":"数位DP"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数位DP | Yatung's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yatung's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay hungry, Stay foolish.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E4%BD%8DDP"><span class="nav-number">1.</span> <span class="nav-text">数位DP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#788-%E6%97%8B%E8%BD%AC%E6%95%B0%E5%AD%97"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">788. 旋转数字</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">优化</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yatung Yu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Yatung Yu</p>
+  <div class="site-description" itemprop="description">Stay hungry, Stay foolish.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/WabbyWabbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;WabbyWabbo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yatung.yu@gmail.com" title="E-Mail → mailto:yatung.yu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/1987657913" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;1987657913" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/21279589?spm_id_from=333.1007.0.0" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;21279589?spm_id_from&#x3D;333.1007.0.0" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/WabbyWabbo" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/20/digit-dp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yatung Yu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yatung's Blog">
+      <meta itemprop="description" content="Stay hungry, Stay foolish.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数位DP | Yatung's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数位DP
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-20 21:37:10" itemprop="dateCreated datePublished" datetime="2022-09-20T21:37:10+08:00">2022-09-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-17 00:39:18" itemprop="dateModified" datetime="2023-03-17T00:39:18+08:00">2023-03-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="数位DP"><a href="#数位DP" class="headerlink" title="数位DP"></a>数位DP</h1><h4 id="788-旋转数字"><a href="#788-旋转数字" class="headerlink" title="788. 旋转数字"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotated-digits/">788. 旋转数字</a></h4><p>我们称一个数 X 为好数, 如果它的每位数字逐个地被旋转 180 度后，我们仍可以得到一个有效的，且和 X 不同的数。要求每位数字都要被旋转。</p>
+<p>如果一个数的每位数字被旋转以后仍然还是一个数字， 则这个数是有效的。0, 1, 和 8 被旋转后仍然是它们自己；2 和 5 可以互相旋转成对方（在这种情况下，它们以不同的方向旋转，换句话说，2 和 5 互为镜像）；6 和 9 同理，除了这些以外其他的数字旋转以后都不再是有效的数字。</p>
+<p>现在我们有一个正整数 N, 计算从 1 到 N 中有多少个数 X 是好数。</p>
+<span id="more"></span>
+<hr>
+<p>举例：</p>
+<p>N &#x3D; 4231</p>
+<p>共有4个数位，_ _ _ _ ，用4个横线来表示的话，我们可以从高位向低位填数字进去，例如填<u>0 3 2 9</u>就代表了 329 这个数。但是填的时候，并不能无脑填 0 ~ 9，比如最高位就不能超过4。因此引出一个概念就是<strong>该数位的填写是否受到限制</strong>。下面讨论何时会受到限制：</p>
+<p>最高位必然受到限制，最大不超过 4；</p>
+<p>非最高位受到前面的影响，当前面的数位都达到了上限值时，当前位就会受到限制。举例如下：</p>
+<ul>
+<li>4 2 _ _ ，十位上，就不能随便填了，最大只能填 3；</li>
+<li>4 1 _ _ ，十位上，不受限制，因为前面未达到 42；</li>
+<li>1 2 _ _ ，十位上，不受限制，理由同上。</li>
+</ul>
+<hr>
+<p>回到本题，题目所求的数等价于「不能含有 3，4，7 &amp;&amp; 至少含有一个2，5，6，9」。</p>
+<p>我们规定一个函数 <code>int f(int i, int hasDiff, boolean isLimit)</code>，该函数返回值的含义是从第 i 个数位开始，能够得到的『好数』数量。</p>
+<p>​		 <code>hasDiff</code> 这是为了表明从第 0 位，到现在的第 i 位中，是否已经包含了「2，5，6，9」这些数字。</p>
+<p>​		<code>isLimit</code>  代表了当前的第 i 位是否受到限制，即 [0, i] 这些位组成的数，是否达到了上限。</p>
+<p>写出代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// -1 代表不可旋转，1 代表旋转后变了，0 代表旋转后不变</span></span><br><span class="line"><span class="type">int</span>[] DIFFS = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>&#125;; </span><br><span class="line"><span class="type">char</span>[] s;</span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rotatedDigits</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">	s = Integer.toString(n).toCharArray();</span><br><span class="line">  <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> s.length;</span><br><span class="line">  <span class="keyword">return</span> f(<span class="number">0</span>, <span class="number">0</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> hasDiff, <span class="type">boolean</span> isLimit)</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (i == s.length) <span class="keyword">return</span> hasDiff;</span><br><span class="line">  <span class="type">int</span> <span class="variable">up</span> <span class="operator">=</span> isLimit ? s[i] - <span class="string">&#x27;0&#x27;</span> : <span class="number">9</span>;	<span class="comment">// 上限</span></span><br><span class="line">  <span class="comment">// 填下一位，范围是[0,up]</span></span><br><span class="line">  <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">0</span>; d &lt;= up; d++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (DIFFS[d] == -<span class="number">1</span>) <span class="keyword">continue</span>;	<span class="comment">// 不考虑填入 3，4，7</span></span><br><span class="line">    ans += f(i+<span class="number">1</span>, hasDiff|DIFFS[d], isLimit &amp;&amp; d==up);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>对于递归过程的辅助理解：</p>
+<p>例如：N &#x3D; 5230</p>
+<p>首位必受限，且尚无 diff数字，故最终答案 &#x3D; <code>f(0,0,T)</code></p>
+<p>此时 <code>isLimit == true</code> 所以上限 <code>up = 5</code></p>
+<p>根据递归：<code>f(0,0,T) = f(1,0,F) + f(1,0,F) + f(1,1,F) + f(1,1,T)</code></p>
+<p>前两个 <code>f(1, 0,F)</code> 分别代表了万位填 0 和填 1 的情况，填 0 和 1 并不会带来新的 diff，所以 <code>hasDiff = 0</code>，未达到上限 5，所以 <code>isLimit = false</code>；</p>
+<p><code>f(1,1,F)</code>代表填 2 的情形，2 是会带来 diff 的，所以 <code>hasDiff = 1</code>，未达到上限 5，所以 <code>isLimit = false</code>；</p>
+<p><code>f(1,1,T)</code> 代表填5的情形，5是会带来 diff 的，所以 <code>hasDiff = 1</code>，达到上限 5，所以 <code>isLimit = true</code>;</p>
+<p>至于填 3 和 4 的情形，直接跳过即可，因为他们不可旋转，不能填入。</p>
+<p>继续递归：</p>
+<p>以万位填 5 为例，<code>f(1,1,T) = f(2,1,F) + f(2,1,F) + f(2,1,T)</code>，这分别代表了千位填0，1 和 2的情形。</p>
+<p>再取其中千位填 2 的情形为例：<code>f(2,1,T) = f(3,1,F) + f(3,1,F) + f(3,1,F) + f(3,1,T) </code>，这分别代表了百位填0，1，2 和 3 的情形。</p>
+<p>再取其中百位填3的情形为例: <code>f(3,1,T) = f(4,1,T)</code>，代表个位填 0 的情形。</p>
+<p>此时各个数位全部都填完了，这个填出来的数就是5230，那么此时就该跳出递归开始返回了，问题是最终 <code>f(4,1,T)</code> 等于几呢？此时填出来的数是否是「好数」取决于 <code>hasDiff</code>，毕竟我们填数的时候，只限制了不能填 3，4，7 这几个数字，完全可能填出来一个像 1801 这样的数，而这个数并不是我们要找的「好数」，因为里面至少要包含 2，5，6，9 中的一个，是否包含 2，5，6，9 我们是存储在 <code>hasDiff</code> 里的，所以最终当<code> i == m</code> 的时候，意味着我们填完了所有的数，此时返回 <code>hasDiff</code> 即可。</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>从上述递归过程中可以看出来，<code>f(1,1,F)</code>，<code>f(3,1,F)</code> 等都被计算了多次，因此这里可以通过记忆化的方式来优化。注意到重复计算的都是 <code>isLimit = false</code> 的情形，这是因为在某个数位上，只有一个为数字会导致 <code>isLimit = true</code> 所以，这个在<code>f(i, hasDiff, isLimit)</code> 中是不会重复的。</p>
+<p>因此需要记忆化的仅仅是 <code>isLiimt = false</code> 的情形，所以针对 i 和 hasDiff，使用二维的数组就够，记作 <code>mem[m][2]</code>，初始化为 -1。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// -1 代表不可旋转，1 代表旋转后变了，0 代表旋转后不变</span></span><br><span class="line"><span class="type">int</span>[] DIFFS = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>&#125;; </span><br><span class="line"><span class="type">char</span>[] s;</span><br><span class="line"><span class="type">int</span>[][] mem;</span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">rotatedDigits</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">	s = Integer.toString(n).toCharArray();</span><br><span class="line">  <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> s.length;</span><br><span class="line">  mem = <span class="keyword">new</span> <span class="title class_">int</span>[m][<span class="number">2</span>];</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">    Arrays.fill(mem[i], -<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">return</span> f(<span class="number">0</span>, <span class="number">0</span>, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> hasDiff, <span class="type">boolean</span> isLimit)</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (i == s.length) <span class="keyword">return</span> hasDiff;</span><br><span class="line">  <span class="keyword">if</span> (!isLimit &amp;&amp; mem[i][hasDiff] != -<span class="number">1</span>)	<span class="comment">// 已经计算过了，直接从 mem 里取</span></span><br><span class="line">    <span class="keyword">return</span> mem[i][hasDiff];</span><br><span class="line">  <span class="type">int</span> <span class="variable">up</span> <span class="operator">=</span> isLimit ? s[i] - <span class="string">&#x27;0&#x27;</span> : <span class="number">9</span>;	<span class="comment">// 上限</span></span><br><span class="line">  <span class="comment">// 填下一位，范围是[0,up]</span></span><br><span class="line">  <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">0</span>; d &lt;= up; d++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (DIFFS[d] == -<span class="number">1</span>) <span class="keyword">continue</span>;	<span class="comment">// 不考虑填入 3，4，7</span></span><br><span class="line">    ans += f(i+<span class="number">1</span>, hasDiff|DIFFS[d], isLimit &amp;&amp; d==up);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (!isLimit) mem[i][hasDiff] = ans;	<span class="comment">// 记忆化到 mem 中</span></span><br><span class="line">  <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/10/daily/" rel="prev" title="每日一题">
+                  <i class="fa fa-chevron-left"></i> 每日一题
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yatung Yu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://example.com/2022/09/20/digit-dp/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"WabbyWabbo","repo":"WabbyWabbo.github.io","client_id":"db3d3bf0cfb1033367db","client_secret":"a410a2c056a67a96740460999e235a03777bb5f9","admin_user":"WabbyWabbo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"8fee9300f46395b28033201e08a04ebf"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
