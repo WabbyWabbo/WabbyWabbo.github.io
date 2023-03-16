@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在java程序中，全局监听键盘鼠标事件的两种方式的尝试。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全局监听键盘鼠标事件">
+<meta property="og:url" content="http://example.com/2022/06/09/native-hook/index.html">
+<meta property="og:site_name" content="Yatung&#39;s Blog">
+<meta property="og:description" content="在java程序中，全局监听键盘鼠标事件的两种方式的尝试。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-09T11:08:28.000Z">
+<meta property="article:modified_time" content="2023-03-16T13:05:25.000Z">
+<meta property="article:author" content="Yatung Yu">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/06/09/native-hook/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/06/09/native-hook/","path":"2022/06/09/native-hook/","title":"全局监听键盘鼠标事件"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>全局监听键盘鼠标事件 | Yatung's Blog</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Yatung's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay hungry, Stay foolish.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80-%E4%BD%BF%E7%94%A8jnativehook"><span class="nav-number">1.</span> <span class="nav-text">方式一 使用jnativehook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C-%E4%BD%BF%E7%94%A8Java-Native-Access-JNA"><span class="nav-number">2.</span> <span class="nav-text">方式二 使用Java Native Access (JNA)</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yatung Yu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Yatung Yu</p>
+  <div class="site-description" itemprop="description">Stay hungry, Stay foolish.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/WabbyWabbo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;WabbyWabbo" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:yatung.yu@gmail.com" title="E-Mail → mailto:yatung.yu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/1987657913" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;1987657913" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/21279589?spm_id_from=333.1007.0.0" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;21279589?spm_id_from&#x3D;333.1007.0.0" rel="noopener" target="_blank"><i class="fab fa-youtube fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/WabbyWabbo" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/09/native-hook/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Yatung Yu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yatung's Blog">
+      <meta itemprop="description" content="Stay hungry, Stay foolish.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="全局监听键盘鼠标事件 | Yatung's Blog">
+      <meta itemprop="description" content="在java程序中，全局监听键盘鼠标事件的两种方式的尝试。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          全局监听键盘鼠标事件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-09 19:08:28" itemprop="dateCreated datePublished" datetime="2022-06-09T19:08:28+08:00">2022-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-16 21:05:25" itemprop="dateModified" datetime="2023-03-16T21:05:25+08:00">2023-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">在java程序中，全局监听键盘鼠标事件的两种方式的尝试。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="方式一-使用jnativehook"><a href="#方式一-使用jnativehook" class="headerlink" title="方式一 使用jnativehook"></a>方式一 使用<code>jnativehook</code></h3><p><a target="_blank" rel="noopener" href="https://github.com/kwhat/jnativehook">Github地址</a></p>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*	写一个类实现NativeMouseInputListener</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GlobalMouseListener</span> <span class="keyword">implements</span> <span class="title class_">NativeMouseInputListener</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">nativeMousePressed</span><span class="params">(NativeMouseEvent e)</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;Mouse Pressed:&quot;</span> + e.getPoint());</span><br><span class="line">        EditorServiceImpl.captureFinished = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">nativeMouseReleased</span><span class="params">(NativeMouseEvent e)</span> &#123;</span><br><span class="line">        log.debug(<span class="string">&quot;Mouse Released:&quot;</span> + e.getPoint());</span><br><span class="line">        EditorServiceImpl.captureFinished = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            GlobalScreen.registerNativeHook();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NativeHookException ex) &#123;</span><br><span class="line">            System.err.println(<span class="string">&quot;There was a problem registering the native hook.&quot;</span>);</span><br><span class="line">            System.err.println(ex.getMessage());</span><br><span class="line"></span><br><span class="line">            System.exit(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Construct the example object.</span></span><br><span class="line">        <span class="type">GlobalMouseListener</span> <span class="variable">example</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GlobalMouseListener</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Add the appropriate listeners.</span></span><br><span class="line">        GlobalScreen.addNativeMouseListener(example);</span><br><span class="line">        GlobalScreen.addNativeMouseMotionListener(example);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>挺好用的一个库，但是将项目打包成jar之后，会遇到一个报错：<code>URI is not hierarchical</code>，这个目前不知道是什么原因导致的，后续找到了再更新。</p>
+<h3 id="方式二-使用Java-Native-Access-JNA"><a href="#方式二-使用Java-Native-Access-JNA" class="headerlink" title="方式二 使用Java Native Access (JNA)"></a>方式二 使用<code>Java Native Access (JNA)</code></h3><p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">LowLevelMouseProc</span> <span class="keyword">extends</span> <span class="title class_">HOOKPROC</span> &#123;  </span><br><span class="line">    LRESULT <span class="title function_">callback</span><span class="params">( <span class="type">int</span> nCode, WPARAM wParam, MouseHookStruct lParam )</span>;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MouseHookStruct</span> <span class="keyword">extends</span> <span class="title class_">Structure</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> List <span class="title function_">getFieldOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.asList(<span class="string">&quot;pt&quot;</span>,<span class="string">&quot;hwnd&quot;</span>,<span class="string">&quot;wHitTestCode&quot;</span>,<span class="string">&quot;dwExtraInfo&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">public</span> POINT        pt;  </span><br><span class="line">    <span class="keyword">public</span> HWND         hwnd;  </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>          wHitTestCode;  </span><br><span class="line">    <span class="keyword">public</span> ULONG_PTR    dwExtraInfo;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MouseLLHook</span> &#123;  </span><br><span class="line">      </span><br><span class="line">    <span class="comment">// 鼠标钩子函数里判断按键类型的常数  </span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>     <span class="variable">WM_LBUTTONUP</span>    <span class="operator">=</span> <span class="number">514</span>;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>     <span class="variable">WM_LBUTTONDOWN</span>  <span class="operator">=</span> <span class="number">513</span>;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>     <span class="variable">WM_RBUTTONUP</span>    <span class="operator">=</span> <span class="number">517</span>;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>     <span class="variable">WM_RBUTTONDOWN</span>  <span class="operator">=</span> <span class="number">516</span>;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>     <span class="variable">WM_MOUSEHWHEEL</span>  <span class="operator">=</span> <span class="number">526</span>;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>     <span class="variable">WM_MOUSEWHEEL</span>   <span class="operator">=</span> <span class="number">522</span>;  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span>     <span class="variable">WM_MOUSEMOVE</span>    <span class="operator">=</span> <span class="number">512</span>;  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">static</span> HHOOK                mouseHHK, keyboardHHK;  <span class="comment">// 鼠标、键盘钩子的句柄  </span></span><br><span class="line">    <span class="keyword">static</span> LowLevelMouseProc    mouseHook;              <span class="comment">// 鼠标钩子函数  </span></span><br><span class="line">                                                          </span><br><span class="line">    <span class="comment">// 安装钩子  </span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setHook</span><span class="params">()</span> &#123;  </span><br><span class="line">        <span class="type">HMODULE</span> <span class="variable">hMod</span> <span class="operator">=</span> Kernel32.INSTANCE.GetModuleHandle( <span class="literal">null</span> );  </span><br><span class="line">        mouseHHK = User32.INSTANCE.SetWindowsHookEx( WinUser.WH_MOUSE_LL, mouseHook, hMod, <span class="number">0</span> );</span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="comment">// 卸载钩子  </span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">unhook</span><span class="params">()</span> &#123;</span><br><span class="line">        User32.INSTANCE.UnhookWindowsHookEx( mouseHHK );  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">( String[] args )</span> &#123;  </span><br><span class="line">        mouseHook = <span class="keyword">new</span> <span class="title class_">LowLevelMouseProc</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span>  </span><br><span class="line">            <span class="comment">// 该函数参数的意思参考：http://msdn.microsoft.com/en-us/library/windows/desktop/ms644986(v=vs.85).aspx  </span></span><br><span class="line">            <span class="keyword">public</span> LRESULT <span class="title function_">callback</span><span class="params">( <span class="type">int</span> nCode, WPARAM wParam, MouseHookStruct lParam )</span> &#123;</span><br><span class="line">                <span class="keyword">switch</span> ( wParam.intValue() ) &#123;  </span><br><span class="line">                    <span class="keyword">case</span> WM_MOUSEMOVE:  </span><br><span class="line">                        System.out.print( <span class="string">&quot;mouse moved:&quot;</span> );  </span><br><span class="line">                        <span class="keyword">break</span>;  </span><br><span class="line">                    <span class="keyword">case</span> WM_LBUTTONDOWN:  </span><br><span class="line">                        System.out.print( <span class="string">&quot;mouse left button down:&quot;</span> );  </span><br><span class="line">                        <span class="keyword">break</span>;  </span><br><span class="line">                    <span class="keyword">case</span> WM_LBUTTONUP:  </span><br><span class="line">                        System.out.print( <span class="string">&quot;mouse left button up&quot;</span> );  </span><br><span class="line">                        <span class="keyword">break</span>;  </span><br><span class="line">                    <span class="keyword">case</span> WM_RBUTTONUP:  </span><br><span class="line">                        System.out.print( <span class="string">&quot;mouse right button up:&quot;</span> );  </span><br><span class="line">                        <span class="keyword">break</span>;  </span><br><span class="line">                    <span class="keyword">case</span> WM_RBUTTONDOWN:  </span><br><span class="line">                        System.out.print( <span class="string">&quot;mouse right button down:&quot;</span> );  </span><br><span class="line">                        <span class="keyword">break</span>;  </span><br><span class="line">                    <span class="keyword">case</span> WM_MOUSEWHEEL:  </span><br><span class="line">                        System.out.print( <span class="string">&quot;mouse wheel rotated:&quot;</span> );  </span><br><span class="line">                        <span class="keyword">break</span>;  </span><br><span class="line">                &#125;  </span><br><span class="line">                System.out.println( <span class="string">&quot;(&quot;</span> + lParam.pt.x + <span class="string">&quot;,&quot;</span> + lParam.pt.y + <span class="string">&quot;)&quot;</span> );  </span><br><span class="line">                <span class="keyword">return</span> User32.INSTANCE.CallNextHookEx( mouseHHK, nCode, wParam, lParam.getPointer() );  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;;  </span><br><span class="line"></span><br><span class="line">        setHook();  </span><br><span class="line">          </span><br><span class="line">        <span class="type">int</span> result;  </span><br><span class="line">        <span class="type">MSG</span> <span class="variable">msg</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MSG</span>();    </span><br><span class="line">        <span class="comment">// 实际上while循环一次都不执行，这些代码的作用我理解是让程序在GetMessage函数这里阻塞，不然程序就结束了。  </span></span><br><span class="line">        <span class="keyword">while</span> ( ( result = User32.INSTANCE.GetMessage( msg, <span class="literal">null</span>, <span class="number">0</span>, <span class="number">0</span> ) ) != <span class="number">0</span> ) &#123;  </span><br><span class="line">            <span class="keyword">if</span> ( result == -<span class="number">1</span> ) &#123;  </span><br><span class="line">                System.err.println( <span class="string">&quot;error in GetMessage&quot;</span> );  </span><br><span class="line">                unhook();  </span><br><span class="line">                <span class="keyword">break</span>;  </span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">                User32.INSTANCE.TranslateMessage( msg );  </span><br><span class="line">                User32.INSTANCE.DispatchMessage( msg );  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        </span><br><span class="line">        unhook();  </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/09/element-ui-encoding/" rel="prev" title="element-ui插件中文乱码问题">
+                  <i class="fa fa-chevron-left"></i> element-ui插件中文乱码问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/25/inOrder-traverse/" rel="next" title="中序遍历">
+                  中序遍历 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yatung Yu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://example.com/2022/06/09/native-hook/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"WabbyWabbo","repo":"WabbyWabbo.github.io","client_id":"db3d3bf0cfb1033367db","client_secret":"a410a2c056a67a96740460999e235a03777bb5f9","admin_user":"WabbyWabbo","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"94a1e443f342765182f60a37284d4026"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
